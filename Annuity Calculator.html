@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Calculate your annuity.</p>
+
+<form id="annuityValues" action="/action_page.php">
+  Interest Rate (%): <input type="text" name="i"><br>
+  Number of payment periods (N): <input type="text" name="n"><br>
+  <br>
+  <p>Input 1 of the following parameters:</p>
+  Present Value ($): <input type="text" name="P"><br>
+  Future Value ($): <input type="text" name="F"><br>
+  Annuity Amount ($): <input type="text" name="A"><br>
+  <br>
+  
+  
+  
+  <input type="button" onclick="unknownsSolve()" value="Calculate Unknowns">
+
+
+
+</form>
+
+
+<p id="annuityAns"></p>
+
+<script>
+
+	var annuityVal = document.getElementById("annuityValues");
+
+
+function unknownsSolve(){
+	var i=Number(annuityVal.elements[0].value)/100.0;
+    var n=Number(annuityVal.elements[1].value);
+    var p=Number(annuityVal.elements[2].value);
+    var f=Number(annuityVal.elements[3].value);
+    var a=Number(annuityVal.elements[4].value);
+    
+    if (p != 0){
+    	a=p*(i*Math.pow(1+i,n))/(Math.pow(1+i,n)-1);
+        a=Math.round(a * 100) / 100;
+        
+        msg = "To recover your intitial capital investment of $" + p + ", you must have an annuity income of $" + a + ", for " + n + " payment periods at an interest rate of " + i*100 + "%."; 
+    }
+    else if (f != 0){
+    	a=f*(i)/(Math.pow(1+i,n)-1);
+    	a=Math.round(a * 100) / 100;
+        
+        msg = "To repay your future debt of $" + f +", you must have an annuity payment of $" + a + ", for " + n + " payment periods at an interest rate of " + i*100 + "%.";
+    
+    }
+    else if (a != 0){
+    	p=a*(Math.pow(1+i,n)-1)/(i*Math.pow(1+i,n));
+        p=Math.round(p * 100) / 100;
+        
+        f=a*(Math.pow(1+i,n)-1)/(i);
+        f=Math.round(f * 100) / 100;
+    	
+        msg = "An annuity of $" + a + " for " + n + " payment periods at an interest rate of " + i*100 + "%, has a present value of $" + p + " and a future value of $" + f + ".";
+    
+    }
+    else{
+    	msg = "Check form input and try again."
+    }
+    
+    document.getElementById("annuityAns").innerHTML = msg;
+}
+    
+
+</script>
+
+</body>
+</html>
+
+
