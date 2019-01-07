@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Calculate your compounded interest.</p>
+
+<form id="interestValues" action="/action_page.php">
+  Principle Value ($): <input type="text" name="p"><br>
+  Annual Percentage Rate (%): <input type="text" name="r"><br>
+  Duration (years): <input type="text" name="t"><br>
+  <br>
+  
+  <p>Compounding Methods:</p>
+  
+  <input type="button" onclick="annual()" value="Annually">
+<input type="button" onclick="semiannual()" value="Semiannually">
+<input type="button" onclick="month()" value="Monthly">
+<input type="button" onclick="day()" value="Daily">
+<input type="button" onclick="cont()" value="Continuously">
+
+
+</form>
+
+
+<p id="interestAns"></p>
+
+<script>
+
+	var interestVal = document.getElementById("interestValues");
+
+function annual() {   
+	var p=Number(interestVal.elements[0].value);
+    var r=Number(interestVal.elements[1].value);
+    var t=Number(interestVal.elements[2].value);
+    
+    var F=p*Math.pow((1+r/100.0),t);
+    F=Math.round(F * 100) / 100;
+    msg="After " + t + " years, the value of the principle will be $" + F;
+    document.getElementById("interestAns").innerHTML = msg;
+}
+
+function semiannual(){
+	var p=Number(interestVal.elements[0].value);
+    var r=Number(interestVal.elements[1].value);
+    var t=Number(interestVal.elements[2].value);
+    var F=p*Math.pow((1+r/(100.0*2)),t*2);
+    F=Math.round(F * 100) / 100;
+    msg="After " + t + " years, the value of the principle will be $" + F;
+    document.getElementById("interestAns").innerHTML = msg;
+}
+
+
+function month(){
+	var p=Number(interestVal.elements[0].value);
+    var r=Number(interestVal.elements[1].value);
+    var t=Number(interestVal.elements[2].value);
+    
+    var F=p*Math.pow((1+r/(100.0*12)),t*12);
+    F=Math.round(F * 100) / 100;
+    msg="After " + t + " years, the value of the principle will be $" + F;
+    document.getElementById("interestAns").innerHTML = msg;
+}
+
+function day(){
+    var p=Number(interestVal.elements[0].value);
+    var r=Number(interestVal.elements[1].value);
+    var t=Number(interestVal.elements[2].value);
+    var F=p*Math.pow((1+r/(100.0*365)),t*365);
+    F=Math.round(F * 100) / 100;
+    msg="After " + t + " years, the value of the principle will be $" + F;
+    document.getElementById("interestAns").innerHTML = msg;
+}
+
+
+function cont(){
+	var p=Number(interestVal.elements[0].value);
+    var r=Number(interestVal.elements[1].value);
+    var t=Number(interestVal.elements[2].value);
+    var F=p*Math.pow(2.71828,r/100.0*t);
+    F=Math.round(F * 100) / 100;
+    msg="After " + t + " years, the value of the principle will be $" + F;
+    document.getElementById("interestAns").innerHTML = msg;
+}
+    
+
+</script>
+
+</body>
+</html>
+
+
